@@ -6,5 +6,6 @@ public class addemp {
 	public static void main(String args[]){
 addemp.m1();
 addemp.m1();
+addemp.m1();
 }
 }
