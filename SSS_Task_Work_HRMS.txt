@@ -1,0 +1,124 @@
+flow for app development:
+
+Website Development Life Cycle
+
+Step 1. Gathering Information: Purpose, Main Goals, and Target Audience
+Step 2. Planning: Sitemap and Wireframe Creation
+Step 3. Design: Page Layouts, Review, and Approval Cycle
+Step 4.  Content Writing and Assembly
+Step 5. Coding
+Step 6. Testing, Review and Launch
+Step 7. Maintenance: Opinion Monitoring and Regular Updating
+Bonus: Website Development Checklist
+
+
+Skils for HRMS Development
+
+ I am going to guide you step by step for Employee Registration and Login using the below tools and technologies.
+
+1. Spring Framework (Core, MVC & JDBC)
+
+2. Java 1.8
+
+3. Maven 3.3.9
+
+4. Eclipse IDE (Mars2)
+
+5. MySQL 5.1
+
+
+Step 1: Create a Maven Project
+
+     Using Eclipse IDE, create a Maven Project by selecting Web Archetype.
+
+Step 2: Update Pom.xml
+   Update your maven dependencies.
+
+Step 3: Update web.xml
+      Update the web.xml under src/main/webapp/WEB-INF : 
+      
+      DispatcherServlet  is the root Servlet for any Servlet defined in your application. 
+      It will redirect the request made to the application to the appropriate controller 
+      based on the URL.
+
+      spring-mvc  is the name of the root servlet and Spring container will look for
+      the configuration with this name. So next step is to create a spring configuration
+      with spring-mvc-servlet.xml.
+
+Step 4: Create spring-mvc-servlet.xml
+
+Create  spring-mvc-servlet.xml  under the src/main/webapp/WEB-INF folder and define the beans.
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <import resource="classpath:jbr/config/user-beans.xml" />
+    <context:component-scan base-package="jbr.springmvc" />
+    <context:annotation-config />
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+</beans>
+
+Step 5: Create Controllers
+Create Separate Controllers for User Registration and Login as below.
+
+Create a package  com.hrms.employee.controller
+
+RegistrationController.java
+LoginController.java
+
+
+Step 5: Create POJO Classes
+
+Create a package  com.hrms.employee.model
+EmployeeLogin.java
+{
+  private String username;
+  private String password;
+}
+
+Employee.java
+{
+  private String username;
+  private String password;
+  private String firstname;
+  private String lastname;
+  private String email;
+  private String address;
+  private int phone;
+
+}
+
+Note: If you wanted to add any new logic, you can add another layer 
+          called service and access the DAO layer.
+
+Step 6: Create DAO Classes
+
+Create an interface/classes for accessing the MySQL Database.
+Create a package  com.hrms.employee.dao
+
+EmployeeDao.java
+EmployeeDaoImpl.java
+
+Step 7: Create Spring Beans Configuration
+
+Under  resources , create a new xml bean configuration  user-beans.xml to define 
+the beans we created.
+
+Step 8: Create Tables in MySQL
+
+Step 9: Create Views
+Under the /src/main/webapp folder, create a home.jsp which we defined as 'welcome-file' in web.xml.
+
+1) home.jsp
+2) login.jsp
+3) welcome.jsp
+
+Step 10: Run the Application
+
+Right-click the application and Maven->clean.
+
+Right-click the application and Maven->install.
+
+Right-click the application and Run As->Run on Server->Run using Tomcat.
